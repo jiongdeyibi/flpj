@@ -7,17 +7,19 @@ import java.util.Map;
 
 public interface BaseService<T extends BaseModel> {
 
+    List<T> selectAll();
+
     List<T> findByCondition(Map<String, Object> params);
 
     PageInfo<T> findByPage(Map<String, Object> params);
 
-    int deleteByPrimaryKey(String id);
+    int deleteByPrimaryKey(Map<String, Object> params);
 
     int insert(T record);
 
     int insertSelective(T record);
 
-    T selectByPrimaryKey(String id);
+    T selectByPrimaryKey(Map<String, Object> params);
 
     int updateByPrimaryKeySelective(T record);
 

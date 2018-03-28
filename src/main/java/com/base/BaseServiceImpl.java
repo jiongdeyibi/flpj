@@ -21,6 +21,11 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
     private BaseMapper<T> mapper;
 
     @Override
+    public List<T> selectAll() {
+        return mapper.selectAll();
+    }
+
+    @Override
     public List<T> findByCondition(Map<String, Object> params) {
         Page<T> list = mapper.findByCondition(params);
         logger.info("findByCondition:" + list);
@@ -42,10 +47,10 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
 
     @Override
     @Transactional
-    public int deleteByPrimaryKey(String id) {
-        T record = mapper.selectByPrimaryKey(id);
+    public int deleteByPrimaryKey(Map<String, Object> params) {
+        T record = mapper.selectByPrimaryKey(params);
         logger.info("deleteByPrimaryKey:" + record);
-        return mapper.deleteByPrimaryKey(id);
+        return mapper.deleteByPrimaryKey(params);
     }
 
     @Override
@@ -63,10 +68,10 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
     }
 
     @Override
-    public T selectByPrimaryKey(String id) {
-        T record = mapper.selectByPrimaryKey(id);
+    public T selectByPrimaryKey(Map<String, Object> params) {
+        T record = mapper.selectByPrimaryKey(params);
         logger.info("selectByPrimaryKey:" + record);
-        return mapper.selectByPrimaryKey(id);
+        return mapper.selectByPrimaryKey(params);
     }
 
     @Override
