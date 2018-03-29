@@ -19,13 +19,6 @@ public class RankListController extends BaseController {
     @Autowired
     private RankListMapper mapper;
 
-    @PostMapping(value = "/callA")
-    public Object callA(HttpServletRequest request, ModelMap modelMap) {
-        Map<String, Object> params = WebUtil.getParameterMap(request);
-        mapper.callA(params);
-        return setSuccessModelMap(modelMap, params.get("rt_cursor"));
-    }
-
     @PostMapping(value = "/call")
     public Object call(HttpServletRequest request, ModelMap modelMap) {
         Map<String, Object> params = WebUtil.getParameterMap(request);
