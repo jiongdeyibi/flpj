@@ -37,7 +37,7 @@
   <select id="callProcedure" statementType="CALLABLE" parameterType="java.util.Map" >
     {
          call tf_report.sp_rphg020005(
-         #{rt_cursor, mode=OUT, jdbcType=CURSOR, resultMap=BaseResultMap},
+         #{rt_cursor, mode=OUT, jdbcType=CURSOR, resultMap=com.dd.mapper.PjCompanyMapper.BaseResultMap},
          #{i_year,mode=IN,jdbcType=VARCHAR},
          #{i_new_year,mode=IN,jdbcType=VARCHAR},
          #{i_company_id,mode=IN,jdbcType=VARCHAR},

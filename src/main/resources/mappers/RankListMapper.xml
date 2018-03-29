@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dd.mapper.RankListMapper" >
+  <resultMap id="BaseResultMap" type="com.dd.entity.RankList" >
+    <id column="company_id" property="companyId" jdbcType="VARCHAR" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="list_value" property="listValue" jdbcType="DECIMAL" />
+    <result column="score_value" property="scoreValue" jdbcType="DECIMAL" />
+  </resultMap>
+  <resultMap id="BeanResultMap" type="com.dd.entity.entityBean.RankListBean" >
+        <id column="company_id" property="companyId" jdbcType="VARCHAR" />
+        <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+        <result column="list_value" property="listValue" jdbcType="DECIMAL" />
+        <result column="list_value" property="listValueMultiple" jdbcType="DECIMAL" />
+        <result column="score_value" property="scoreValue" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    rownum, company_id, company_name, list_value, score_value
+  </sql>
+  <select id="call" statementType="CALLABLE" parameterType="java.util.Map" >
+    {
+         call <if test="listId != null and listId!=''">${listId}</if>
+         (
+         #{rt_cursor, mode=OUT, jdbcType=CURSOR, resultMap=com.dd.mapper.RankListMapper.BaseResultMap},
+         #{i_year,mode=IN,jdbcType=VARCHAR},
+         #{o_return_msg,mode=OUT,jdbcType=VARCHAR},
+         #{o_return_code,mode=OUT,jdbcType=NUMERIC},
+         #{i_page_num,mode=IN,jdbcType=NUMERIC},
+         #{i_page_size,mode=IN,jdbcType=NUMERIC},
+         #{o_total_count,mode=OUT,jdbcType=NUMERIC}
+         )
+    }
+  </select>
+    <select id="callI" statementType="CALLABLE" parameterType="java.util.Map" >
+        {
+        call tf_report.sp_rphg020004_i(
+        #{rt_cursor, mode=OUT, jdbcType=CURSOR, resultMap=com.dd.mapper.RankListMapper.BeanResultMap},
+        #{i_year,mode=IN,jdbcType=VARCHAR},
+        #{o_return_msg,mode=OUT,jdbcType=VARCHAR},
+        #{o_return_code,mode=OUT,jdbcType=NUMERIC},
+        #{i_page_num,mode=IN,jdbcType=NUMERIC},
+        #{i_page_size,mode=IN,jdbcType=NUMERIC},
+        #{o_total_count,mode=OUT,jdbcType=NUMERIC}
+        )
+        }
+    </select>
+</mapper>

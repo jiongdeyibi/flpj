@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dd.mapper.PjCompanyListMapper" >
+  <resultMap id="BaseResultMap" type="com.dd.entity.PjCompanyList" >
+    <id column="YEAR" property="year" jdbcType="VARCHAR" />
+    <id column="LIST_ID" property="listId" jdbcType="VARCHAR" />
+    <id column="COMPANY_ID" property="companyId" jdbcType="VARCHAR" />
+    <result column="SCORE_VALUE" property="scoreValue" jdbcType="DECIMAL" />
+    <result column="LIST_VALUE" property="listValue" jdbcType="DECIMAL" />
+    <result column="LAST_MODIFIED_BY" property="lastModifiedBy" jdbcType="VARCHAR" />
+    <result column="LAST_MODIFIED_AT" property="lastModifiedAt" jdbcType="TIMESTAMP" />
+    <result column="LIST_VALUE_1" property="listValue1" jdbcType="DECIMAL" />
+    <result column="LIST_VALUE_2" property="listValue2" jdbcType="DECIMAL" />
+    <result column="LIST_VALUE_3" property="listValue3" jdbcType="DECIMAL" />
+    <result column="SCORE_VALUE_1" property="scoreValue1" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    YEAR, LIST_ID, COMPANY_ID, SCORE_VALUE, LIST_VALUE, LAST_MODIFIED_BY, LAST_MODIFIED_AT, 
+    LIST_VALUE_1, LIST_VALUE_2, LIST_VALUE_3, SCORE_VALUE_1
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from IT11.T_RPHG_PJ_COMPANYLIST
+    where YEAR = #{year,jdbcType=VARCHAR}
+      and LIST_ID = #{listId,jdbcType=VARCHAR}
+      and COMPANY_ID = #{companyId,jdbcType=VARCHAR}
+  </select>
+  <select id="findByCondition" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List"/>
+    from IT11.T_RPHG_PJ_COMPANYLIST where 1=1
+    <if test="companyId != null and companyId!=''">and company_id = #{companyId}</if>
+    <if test="year != null and year!=''">and year = #{year}</if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.util.Map" >
+    delete from IT11.T_RPHG_PJ_COMPANYLIST
+    where YEAR = #{year,jdbcType=VARCHAR}
+      and LIST_ID = #{listId,jdbcType=VARCHAR}
+      and COMPANY_ID = #{companyId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.dd.entity.PjCompanyList" >
+    insert into IT11.T_RPHG_PJ_COMPANYLIST (YEAR, LIST_ID, COMPANY_ID, 
+      SCORE_VALUE, LIST_VALUE, LAST_MODIFIED_BY, 
+      LAST_MODIFIED_AT, LIST_VALUE_1, LIST_VALUE_2, 
+      LIST_VALUE_3, SCORE_VALUE_1)
+    values (#{year,jdbcType=VARCHAR}, #{listId,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, 
+      #{scoreValue,jdbcType=DECIMAL}, #{listValue,jdbcType=DECIMAL}, #{lastModifiedBy,jdbcType=VARCHAR}, 
+      #{lastModifiedAt,jdbcType=TIMESTAMP}, #{listValue1,jdbcType=DECIMAL}, #{listValue2,jdbcType=DECIMAL}, 
+      #{listValue3,jdbcType=DECIMAL}, #{scoreValue1,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dd.entity.PjCompanyList" >
+    insert into IT11.T_RPHG_PJ_COMPANYLIST
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="year != null" >
+        YEAR,
+      </if>
+      <if test="listId != null" >
+        LIST_ID,
+      </if>
+      <if test="companyId != null" >
+        COMPANY_ID,
+      </if>
+      <if test="scoreValue != null" >
+        SCORE_VALUE,
+      </if>
+      <if test="listValue != null" >
+        LIST_VALUE,
+      </if>
+      <if test="lastModifiedBy != null" >
+        LAST_MODIFIED_BY,
+      </if>
+      <if test="lastModifiedAt != null" >
+        LAST_MODIFIED_AT,
+      </if>
+      <if test="listValue1 != null" >
+        LIST_VALUE_1,
+      </if>
+      <if test="listValue2 != null" >
+        LIST_VALUE_2,
+      </if>
+      <if test="listValue3 != null" >
+        LIST_VALUE_3,
+      </if>
+      <if test="scoreValue1 != null" >
+        SCORE_VALUE_1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="year != null" >
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="listId != null" >
+        #{listId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="scoreValue != null" >
+        #{scoreValue,jdbcType=DECIMAL},
+      </if>
+      <if test="listValue != null" >
+        #{listValue,jdbcType=DECIMAL},
+      </if>
+      <if test="lastModifiedBy != null" >
+        #{lastModifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifiedAt != null" >
+        #{lastModifiedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="listValue1 != null" >
+        #{listValue1,jdbcType=DECIMAL},
+      </if>
+      <if test="listValue2 != null" >
+        #{listValue2,jdbcType=DECIMAL},
+      </if>
+      <if test="listValue3 != null" >
+        #{listValue3,jdbcType=DECIMAL},
+      </if>
+      <if test="scoreValue1 != null" >
+        #{scoreValue1,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dd.entity.PjCompanyList" >
+    update IT11.T_RPHG_PJ_COMPANYLIST
+    <set >
+      <if test="scoreValue != null" >
+        SCORE_VALUE = #{scoreValue,jdbcType=DECIMAL},
+      </if>
+      <if test="listValue != null" >
+        LIST_VALUE = #{listValue,jdbcType=DECIMAL},
+      </if>
+      <if test="lastModifiedBy != null" >
+        LAST_MODIFIED_BY = #{lastModifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifiedAt != null" >
+        LAST_MODIFIED_AT = #{lastModifiedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="listValue1 != null" >
+        LIST_VALUE_1 = #{listValue1,jdbcType=DECIMAL},
+      </if>
+      <if test="listValue2 != null" >
+        LIST_VALUE_2 = #{listValue2,jdbcType=DECIMAL},
+      </if>
+      <if test="listValue3 != null" >
+        LIST_VALUE_3 = #{listValue3,jdbcType=DECIMAL},
+      </if>
+      <if test="scoreValue1 != null" >
+        SCORE_VALUE_1 = #{scoreValue1,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where YEAR = #{year,jdbcType=VARCHAR}
+      and LIST_ID = #{listId,jdbcType=VARCHAR}
+      and COMPANY_ID = #{companyId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dd.entity.PjCompanyList" >
+    update IT11.T_RPHG_PJ_COMPANYLIST
+    set SCORE_VALUE = #{scoreValue,jdbcType=DECIMAL},
+      LIST_VALUE = #{listValue,jdbcType=DECIMAL},
+      LAST_MODIFIED_BY = #{lastModifiedBy,jdbcType=VARCHAR},
+      LAST_MODIFIED_AT = #{lastModifiedAt,jdbcType=TIMESTAMP},
+      LIST_VALUE_1 = #{listValue1,jdbcType=DECIMAL},
+      LIST_VALUE_2 = #{listValue2,jdbcType=DECIMAL},
+      LIST_VALUE_3 = #{listValue3,jdbcType=DECIMAL},
+      SCORE_VALUE_1 = #{scoreValue1,jdbcType=DECIMAL}
+    where YEAR = #{year,jdbcType=VARCHAR}
+      and LIST_ID = #{listId,jdbcType=VARCHAR}
+      and COMPANY_ID = #{companyId,jdbcType=VARCHAR}
+  </update>
+</mapper>
