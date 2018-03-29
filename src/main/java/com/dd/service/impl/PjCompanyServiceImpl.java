@@ -22,4 +22,9 @@ public class PjCompanyServiceImpl extends BaseServiceImpl<PjCompany> implements 
         return mapper.listCompany(params);
     }
 
+    @Override
+    public void callProcedure(Map<String, Object> params) {
+        mapper.callProcedure(params);
+    }
+
 }

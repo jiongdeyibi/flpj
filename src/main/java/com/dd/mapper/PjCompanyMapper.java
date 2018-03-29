@@ -8,4 +8,6 @@ import java.util.Map;
 
 public interface PjCompanyMapper extends BaseMapper<PjCompany> {
     List<PjCompany> listCompany(Map<String, Object> params);
+
+    void callProcedure(Map<String, Object> params);
 }

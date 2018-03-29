@@ -26,13 +26,28 @@
     <include refid="Base_Column_List"/>
     from IT11.T_RPHG_PJ_COMPANY where 1=1
     <if test="companyId != null and companyId!=''">and company_id = #{companyId}</if>
-    <if test="year != null and year!=''">and year &lt;= #{year}</if>
+    <if test="year != null and year!=''">and year = #{year}</if>
   </select>
   <select id="listCompany" resultMap="BaseResultMap" parameterType="java.util.Map" >
     select
     company_id,company_name
     from IT11.T_RPHG_PJ_COMPANY
     where YEAR = to_char(sysdate,'yyyy')-1
+  </select>
+  <select id="callProcedure" statementType="CALLABLE" parameterType="java.util.Map" >
+    {
+         call tf_report.sp_rphg020005(
+         #{rt_cursor, mode=OUT, jdbcType=CURSOR, resultMap=BaseResultMap},
+         #{i_year,mode=IN,jdbcType=VARCHAR},
+         #{i_new_year,mode=IN,jdbcType=VARCHAR},
+         #{i_company_id,mode=IN,jdbcType=VARCHAR},
+         #{o_return_msg,mode=OUT,jdbcType=VARCHAR},
+         #{o_return_code,mode=OUT,jdbcType=NUMERIC},
+         #{i_page_num,mode=IN,jdbcType=NUMERIC},
+         #{i_page_size,mode=IN,jdbcType=NUMERIC},
+         #{o_total_count,mode=OUT,jdbcType=NUMERIC}
+         )
+    }
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.dd.entity.PjCompany" >
     delete from IT11.T_RPHG_PJ_COMPANY

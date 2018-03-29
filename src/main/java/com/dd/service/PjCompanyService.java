@@ -7,5 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface PjCompanyService extends BaseService<PjCompany> {
-    public List<PjCompany> listCompany(Map<String, Object> params);
+    List<PjCompany> listCompany(Map<String, Object> params);
+
+    void callProcedure(Map<String, Object> params);
 }

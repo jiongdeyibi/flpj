@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -64,6 +63,14 @@ public class PjCompanyController extends BaseController {
         Map<String, Object> params = WebUtil.getParameterMap(request);
         List<PjCompany> list = service.listCompany(params);
         return setSuccessModelMap(modelMap, list);
+
+    }
+
+    @PostMapping(value = "/call")
+    public Object call(HttpServletRequest request, ModelMap modelMap) {
+        Map<String, Object> params = WebUtil.getParameterMap(request);
+        service.callProcedure(params);
+        return setSuccessModelMap(modelMap, params.get("rt_cursor"));
     }
 
 }
