@@ -70,7 +70,7 @@ public class PjCompanyController extends BaseController {
     public Object call(HttpServletRequest request, ModelMap modelMap) {
         Map<String, Object> params = WebUtil.getParameterMap(request);
         service.callProcedure(params);
-        return setSuccessModelMap(modelMap, params.get("rt_cursor"));
+        return setSuccessModelMap(modelMap);
     }
 
 }
