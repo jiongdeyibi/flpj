@@ -14,6 +14,20 @@
     <result column="LIST_VALUE_3" property="listValue3" jdbcType="DECIMAL" />
     <result column="SCORE_VALUE_1" property="scoreValue1" jdbcType="DECIMAL" />
   </resultMap>
+  <resultMap id="BeanResultMap" type="com.dd.entity.entityBean.PjCompanyListBean" >
+    <id column="YEAR" property="year" jdbcType="VARCHAR" />
+    <id column="LIST_ID" property="listId" jdbcType="VARCHAR" />
+    <id column="COMPANY_ID" property="companyId" jdbcType="VARCHAR" />
+    <result column="COMPANY_NAME" property="companyName" jdbcType="VARCHAR" />
+    <result column="SCORE_VALUE" property="scoreValue" jdbcType="DECIMAL" />
+    <result column="LIST_VALUE" property="listValue" jdbcType="DECIMAL" />
+    <result column="LAST_MODIFIED_BY" property="lastModifiedBy" jdbcType="VARCHAR" />
+    <result column="LAST_MODIFIED_AT" property="lastModifiedAt" jdbcType="TIMESTAMP" />
+    <result column="LIST_VALUE_1" property="listValue1" jdbcType="DECIMAL" />
+    <result column="LIST_VALUE_2" property="listValue2" jdbcType="DECIMAL" />
+    <result column="LIST_VALUE_3" property="listValue3" jdbcType="DECIMAL" />
+    <result column="SCORE_VALUE_1" property="scoreValue1" jdbcType="DECIMAL" />
+  </resultMap>
   <sql id="Base_Column_List" >
     YEAR, LIST_ID, COMPANY_ID, SCORE_VALUE, LIST_VALUE, LAST_MODIFIED_BY, LAST_MODIFIED_AT, 
     LIST_VALUE_1, LIST_VALUE_2, LIST_VALUE_3, SCORE_VALUE_1
@@ -25,6 +39,15 @@
     where YEAR = #{year,jdbcType=VARCHAR}
       and LIST_ID = #{listId,jdbcType=VARCHAR}
       and COMPANY_ID = #{companyId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectBean" resultMap="BeanResultMap" parameterType="java.util.Map" >
+    select
+    T1.*, T2.company_name
+    from IT11.T_RPHG_PJ_COMPANYLIST T1,IT11.T_RPHG_PJ_COMPANY T2
+    where T1.COMPANY_ID=T2.COMPANY_ID and T1.YEAR=T2.YEAR
+    and T1.YEAR = #{year,jdbcType=VARCHAR}
+    and T1.LIST_ID = #{listId,jdbcType=VARCHAR}
+    and T1.COMPANY_ID = #{companyId,jdbcType=VARCHAR}
   </select>
   <select id="findByCondition" resultMap="BaseResultMap" parameterType="java.util.Map">
     select
