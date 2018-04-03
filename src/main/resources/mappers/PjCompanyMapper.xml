@@ -23,10 +23,11 @@
   </select>
   <select id="findByCondition" resultMap="BaseResultMap" parameterType="java.util.Map">
     select
-    <include refid="Base_Column_List"/>
-    from IT11.T_RPHG_PJ_COMPANY where 1=1
+    t.*,rpad(trim(t.company_level),3, 'z') as order_list
+    from IT11.T_RPHG_PJ_COMPANY t where 1=1
     <if test="companyId != null and companyId!=''">and company_id = #{companyId}</if>
     <if test="year != null and year!=''">and year = #{year}</if>
+    ORDER BY order_list
   </select>
   <select id="listCompany" resultMap="BaseResultMap" parameterType="java.util.Map" >
     select
