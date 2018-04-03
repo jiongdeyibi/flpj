@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dd.mapper.PjCompanyScoreMapper" >
+  <resultMap id="BaseResultMap" type="com.dd.entity.PjCompanyScore" >
+    <id column="SERIAL_NO" property="serialNo" jdbcType="VARCHAR" />
+    <result column="YEAR" property="year" jdbcType="VARCHAR" />
+    <result column="COMPANY_ID" property="companyId" jdbcType="VARCHAR" />
+    <result column="SCORE_ID" property="scoreId" jdbcType="VARCHAR" />
+    <result column="SCORE_VALUE" property="scoreValue" jdbcType="DECIMAL" />
+    <result column="LAST_MODIFIED_BY" property="lastModifiedBy" jdbcType="VARCHAR" />
+    <result column="LAST_MODIFIED_AT" property="lastModifiedAt" jdbcType="TIMESTAMP" />
+    <result column="ORG_REMARK" property="orgRemark" jdbcType="VARCHAR" />
+    <result column="PUNISH_OBJ" property="punishObj" jdbcType="VARCHAR" />
+    <result column="SCORE_FLAG" property="scoreFlag" jdbcType="CHAR" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="PUNISH_TYPE" property="punishType" jdbcType="CHAR" />
+    <result column="LINK_ADDRESS" property="linkAddress" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.dd.entity.PjCompanyScore" extends="BaseResultMap" >
+    <result column="REMARK" property="remark" jdbcType="CLOB" javaType = "java.lang.String"  typeHandler ="com.dd.util.OracleClobTypeHandler"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SERIAL_NO, YEAR, COMPANY_ID, SCORE_ID, SCORE_VALUE, LAST_MODIFIED_BY, LAST_MODIFIED_AT, 
+    ORG_REMARK, PUNISH_OBJ, SCORE_FLAG, TITLE, PUNISH_TYPE, LINK_ADDRESS
+  </sql>
+  <sql id="Blob_Column_List" >
+    REMARK
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from IT11.T_RPHG_PJ_COMPANYSCORE
+    where SERIAL_NO = #{serialNo,jdbcType=VARCHAR}
+  </select>
+  <select id="findByCondition" resultMap="ResultMapWithBLOBs" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from IT11.T_RPHG_PJ_COMPANYSCORE
+    where SERIAL_NO = #{serialNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from IT11.T_RPHG_PJ_COMPANYSCORE
+    where SERIAL_NO = #{serialNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.dd.entity.PjCompanyScore" >
+    insert into IT11.T_RPHG_PJ_COMPANYSCORE (SERIAL_NO, YEAR, COMPANY_ID, 
+      SCORE_ID, SCORE_VALUE, LAST_MODIFIED_BY, 
+      LAST_MODIFIED_AT, ORG_REMARK, PUNISH_OBJ, 
+      SCORE_FLAG, TITLE, PUNISH_TYPE, 
+      LINK_ADDRESS, REMARK)
+    values (#{serialNo,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, 
+      #{scoreId,jdbcType=VARCHAR}, #{scoreValue,jdbcType=DECIMAL}, #{lastModifiedBy,jdbcType=VARCHAR}, 
+      #{lastModifiedAt,jdbcType=TIMESTAMP}, #{orgRemark,jdbcType=VARCHAR}, #{punishObj,jdbcType=VARCHAR}, 
+      #{scoreFlag,jdbcType=CHAR}, #{title,jdbcType=VARCHAR}, #{punishType,jdbcType=CHAR}, 
+      #{linkAddress,jdbcType=VARCHAR}, #{remark,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dd.entity.PjCompanyScore" >
+    insert into IT11.T_RPHG_PJ_COMPANYSCORE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serialNo != null" >
+        SERIAL_NO,
+      </if>
+      <if test="year != null" >
+        YEAR,
+      </if>
+      <if test="companyId != null" >
+        COMPANY_ID,
+      </if>
+      <if test="scoreId != null" >
+        SCORE_ID,
+      </if>
+      <if test="scoreValue != null" >
+        SCORE_VALUE,
+      </if>
+      <if test="lastModifiedBy != null" >
+        LAST_MODIFIED_BY,
+      </if>
+      <if test="lastModifiedAt != null" >
+        LAST_MODIFIED_AT,
+      </if>
+      <if test="orgRemark != null" >
+        ORG_REMARK,
+      </if>
+      <if test="punishObj != null" >
+        PUNISH_OBJ,
+      </if>
+      <if test="scoreFlag != null" >
+        SCORE_FLAG,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="punishType != null" >
+        PUNISH_TYPE,
+      </if>
+      <if test="linkAddress != null" >
+        LINK_ADDRESS,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serialNo != null" >
+        #{serialNo,jdbcType=VARCHAR},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="scoreId != null" >
+        #{scoreId,jdbcType=VARCHAR},
+      </if>
+      <if test="scoreValue != null" >
+        #{scoreValue,jdbcType=DECIMAL},
+      </if>
+      <if test="lastModifiedBy != null" >
+        #{lastModifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifiedAt != null" >
+        #{lastModifiedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgRemark != null" >
+        #{orgRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="punishObj != null" >
+        #{punishObj,jdbcType=VARCHAR},
+      </if>
+      <if test="scoreFlag != null" >
+        #{scoreFlag,jdbcType=CHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="punishType != null" >
+        #{punishType,jdbcType=CHAR},
+      </if>
+      <if test="linkAddress != null" >
+        #{linkAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dd.entity.PjCompanyScore" >
+    update IT11.T_RPHG_PJ_COMPANYSCORE
+    <set >
+      <if test="year != null" >
+        YEAR = #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        COMPANY_ID = #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="scoreId != null" >
+        SCORE_ID = #{scoreId,jdbcType=VARCHAR},
+      </if>
+      <if test="scoreValue != null" >
+        SCORE_VALUE = #{scoreValue,jdbcType=DECIMAL},
+      </if>
+      <if test="lastModifiedBy != null" >
+        LAST_MODIFIED_BY = #{lastModifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifiedAt != null" >
+        LAST_MODIFIED_AT = #{lastModifiedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgRemark != null" >
+        ORG_REMARK = #{orgRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="punishObj != null" >
+        PUNISH_OBJ = #{punishObj,jdbcType=VARCHAR},
+      </if>
+      <if test="scoreFlag != null" >
+        SCORE_FLAG = #{scoreFlag,jdbcType=CHAR},
+      </if>
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="punishType != null" >
+        PUNISH_TYPE = #{punishType,jdbcType=CHAR},
+      </if>
+      <if test="linkAddress != null" >
+        LINK_ADDRESS = #{linkAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=CLOB},
+      </if>
+    </set>
+    where SERIAL_NO = #{serialNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.dd.entity.PjCompanyScore" >
+    update IT11.T_RPHG_PJ_COMPANYSCORE
+    set YEAR = #{year,jdbcType=VARCHAR},
+      COMPANY_ID = #{companyId,jdbcType=VARCHAR},
+      SCORE_ID = #{scoreId,jdbcType=VARCHAR},
+      SCORE_VALUE = #{scoreValue,jdbcType=DECIMAL},
+      LAST_MODIFIED_BY = #{lastModifiedBy,jdbcType=VARCHAR},
+      LAST_MODIFIED_AT = #{lastModifiedAt,jdbcType=TIMESTAMP},
+      ORG_REMARK = #{orgRemark,jdbcType=VARCHAR},
+      PUNISH_OBJ = #{punishObj,jdbcType=VARCHAR},
+      SCORE_FLAG = #{scoreFlag,jdbcType=CHAR},
+      TITLE = #{title,jdbcType=VARCHAR},
+      PUNISH_TYPE = #{punishType,jdbcType=CHAR},
+      LINK_ADDRESS = #{linkAddress,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=CLOB}
+    where SERIAL_NO = #{serialNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dd.entity.PjCompanyScore" >
+    update IT11.T_RPHG_PJ_COMPANYSCORE
+    set YEAR = #{year,jdbcType=VARCHAR},
+      COMPANY_ID = #{companyId,jdbcType=VARCHAR},
+      SCORE_ID = #{scoreId,jdbcType=VARCHAR},
+      SCORE_VALUE = #{scoreValue,jdbcType=DECIMAL},
+      LAST_MODIFIED_BY = #{lastModifiedBy,jdbcType=VARCHAR},
+      LAST_MODIFIED_AT = #{lastModifiedAt,jdbcType=TIMESTAMP},
+      ORG_REMARK = #{orgRemark,jdbcType=VARCHAR},
+      PUNISH_OBJ = #{punishObj,jdbcType=VARCHAR},
+      SCORE_FLAG = #{scoreFlag,jdbcType=CHAR},
+      TITLE = #{title,jdbcType=VARCHAR},
+      PUNISH_TYPE = #{punishType,jdbcType=CHAR},
+      LINK_ADDRESS = #{linkAddress,jdbcType=VARCHAR}
+    where SERIAL_NO = #{serialNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

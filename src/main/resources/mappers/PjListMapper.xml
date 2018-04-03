@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dd.mapper.PjListMapper" >
+  <resultMap id="BaseResultMap" type="com.dd.entity.PjList" >
+    <id column="YEAR" property="year" jdbcType="VARCHAR" />
+    <id column="LIST_ID" property="listId" jdbcType="VARCHAR" />
+    <result column="LIST_NAME" property="listName" jdbcType="VARCHAR" />
+    <result column="WORK_FLAG" property="workFlag" jdbcType="DECIMAL" />
+    <result column="LAST_MODIFIED_BY" property="lastModifiedBy" jdbcType="VARCHAR" />
+    <result column="LAST_MODIFIED_AT" property="lastModifiedAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    YEAR, LIST_ID, LIST_NAME, WORK_FLAG, LAST_MODIFIED_BY, LAST_MODIFIED_AT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from IT11.T_RPHG_PJ_LIST
+    where YEAR = #{year,jdbcType=VARCHAR}
+      and LIST_ID = #{listId,jdbcType=VARCHAR}
+  </select>
+  <select id="findByCondition" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from IT11.T_RPHG_PJ_LIST where 1=1
+    <if test="year != null and year!=''">and year =#{year}</if>
+    <if test="listId != null and listId!=''">and LIST_ID =#{listId}</if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.util.Map" >
+    delete from IT11.T_RPHG_PJ_LIST
+    where YEAR = #{year,jdbcType=VARCHAR}
+      and LIST_ID = #{listId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.dd.entity.PjList" >
+    insert into IT11.T_RPHG_PJ_LIST (YEAR, LIST_ID, LIST_NAME, 
+      WORK_FLAG, LAST_MODIFIED_BY, LAST_MODIFIED_AT
+      )
+    values (#{year,jdbcType=VARCHAR}, #{listId,jdbcType=VARCHAR}, #{listName,jdbcType=VARCHAR}, 
+      #{workFlag,jdbcType=DECIMAL}, #{lastModifiedBy,jdbcType=VARCHAR}, #{lastModifiedAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dd.entity.PjList" >
+    insert into IT11.T_RPHG_PJ_LIST
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="year != null" >
+        YEAR,
+      </if>
+      <if test="listId != null" >
+        LIST_ID,
+      </if>
+      <if test="listName != null" >
+        LIST_NAME,
+      </if>
+      <if test="workFlag != null" >
+        WORK_FLAG,
+      </if>
+      <if test="lastModifiedBy != null" >
+        LAST_MODIFIED_BY,
+      </if>
+      <if test="lastModifiedAt != null" >
+        LAST_MODIFIED_AT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="year != null" >
+        #{year,jdbcType=VARCHAR},
+      </if>
+      <if test="listId != null" >
+        #{listId,jdbcType=VARCHAR},
+      </if>
+      <if test="listName != null" >
+        #{listName,jdbcType=VARCHAR},
+      </if>
+      <if test="workFlag != null" >
+        #{workFlag,jdbcType=DECIMAL},
+      </if>
+      <if test="lastModifiedBy != null" >
+        #{lastModifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifiedAt != null" >
+        #{lastModifiedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dd.entity.PjList" >
+    update IT11.T_RPHG_PJ_LIST
+    <set >
+      <if test="listName != null" >
+        LIST_NAME = #{listName,jdbcType=VARCHAR},
+      </if>
+      <if test="workFlag != null" >
+        WORK_FLAG = #{workFlag,jdbcType=DECIMAL},
+      </if>
+      <if test="lastModifiedBy != null" >
+        LAST_MODIFIED_BY = #{lastModifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifiedAt != null" >
+        LAST_MODIFIED_AT = #{lastModifiedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where YEAR = #{year,jdbcType=VARCHAR}
+      and LIST_ID = #{listId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dd.entity.PjList" >
+    update IT11.T_RPHG_PJ_LIST
+    set LIST_NAME = #{listName,jdbcType=VARCHAR},
+      WORK_FLAG = #{workFlag,jdbcType=DECIMAL},
+      LAST_MODIFIED_BY = #{lastModifiedBy,jdbcType=VARCHAR},
+      LAST_MODIFIED_AT = #{lastModifiedAt,jdbcType=TIMESTAMP}
+    where YEAR = #{year,jdbcType=VARCHAR}
+      and LIST_ID = #{listId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -66,6 +66,13 @@ public class PjCompanyController extends BaseController {
 
     }
 
+    /**
+     * sp_rphg020005
+     *
+     * @param request
+     * @param modelMap
+     * @return
+     */
     @PostMapping(value = "/call")
     public Object call(HttpServletRequest request, ModelMap modelMap) {
         Map<String, Object> params = WebUtil.getParameterMap(request);

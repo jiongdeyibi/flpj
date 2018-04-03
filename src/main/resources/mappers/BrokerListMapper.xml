@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dd.mapper.BrokerListMapper" >
+  <resultMap id="BaseResultMap" type="com.dd.entity.BrokerList" >
+    <id column="serial_no" property="serialNo" jdbcType="VARCHAR" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="VARCHAR" />
+    <result column="score_promit" property="scorePromit" jdbcType="VARCHAR" />
+    <result column="score_value" property="scoreValue" jdbcType="DECIMAL" />
+    <result column="pulish_organ" property="pulishOrgan" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="org_remark" property="orgRemark" jdbcType="VARCHAR" />
+    <result column="punish_obj" property="punishObj" jdbcType="VARCHAR" />
+    <result column="score_flag" property="scoreFlag" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="call" statementType="CALLABLE" parameterType="java.util.Map" >
+    {
+         call tf_report.sp_rphg020003
+         (
+         #{rt_cursor, mode=OUT, jdbcType=CURSOR, resultMap=com.dd.mapper.BrokerListMapper.BaseResultMap},
+         #{rt_cursor1, mode=OUT, jdbcType=CURSOR, resultMap=com.dd.mapper.BrokerListMapper.BaseResultMap},
+         #{i_year,mode=IN,jdbcType=VARCHAR},
+         #{i_begindate,mode=IN,jdbcType=VARCHAR},
+         #{i_enddate,mode=IN,jdbcType=VARCHAR},
+         #{i_company_id,mode=IN,jdbcType=VARCHAR},
+         #{o_return_msg,mode=OUT,jdbcType=VARCHAR},
+         #{o_return_code,mode=OUT,jdbcType=NUMERIC},
+         #{i_page_num,mode=IN,jdbcType=NUMERIC},
+         #{i_page_size,mode=IN,jdbcType=NUMERIC},
+         #{o_total_count,mode=OUT,jdbcType=NUMERIC}
+         )
+    }
+  </select>
+</mapper>

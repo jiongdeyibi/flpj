@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dd.mapper.PjScoreMapper" >
+  <resultMap id="BaseResultMap" type="com.dd.entity.PjScore" >
+    <id column="SCORE_ID" property="scoreId" jdbcType="VARCHAR" />
+    <result column="SCORE_PROMIT" property="scorePromit" jdbcType="VARCHAR" />
+    <result column="OBJECT_KIND" property="objectKind" jdbcType="VARCHAR" />
+    <result column="SCORE_VALUE" property="scoreValue" jdbcType="DECIMAL" />
+    <result column="PULISH_ORGAN" property="pulishOrgan" jdbcType="VARCHAR" />
+    <result column="LAST_MODIFIED_BY" property="lastModifiedBy" jdbcType="VARCHAR" />
+    <result column="LAST_MODIFIED_AT" property="lastModifiedAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SCORE_ID, SCORE_PROMIT, OBJECT_KIND, SCORE_VALUE, PULISH_ORGAN, LAST_MODIFIED_BY, 
+    LAST_MODIFIED_AT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from IT11.T_RPHG_PJ_SCORE
+    where SCORE_ID = #{scoreId,jdbcType=VARCHAR}
+  </select>
+  <select id="findByCondition" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from IT11.T_RPHG_PJ_SCORE where 1=1
+    <if test="scorePromit != null and scorePromit!=''">and SCORE_PROMIT =#{scorePromit}</if>
+    <if test="objectKind != null and objectKind!=''">and OBJECT_KIND =#{objectKind}</if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from IT11.T_RPHG_PJ_SCORE
+    where SCORE_ID = #{scoreId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.dd.entity.PjScore" >
+    insert into IT11.T_RPHG_PJ_SCORE (SCORE_ID, SCORE_PROMIT, OBJECT_KIND, 
+      SCORE_VALUE, PULISH_ORGAN, LAST_MODIFIED_BY, 
+      LAST_MODIFIED_AT)
+    values (#{scoreId,jdbcType=VARCHAR}, #{scorePromit,jdbcType=VARCHAR}, #{objectKind,jdbcType=VARCHAR}, 
+      #{scoreValue,jdbcType=DECIMAL}, #{pulishOrgan,jdbcType=VARCHAR}, #{lastModifiedBy,jdbcType=VARCHAR}, 
+      #{lastModifiedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dd.entity.PjScore" >
+    insert into IT11.T_RPHG_PJ_SCORE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="scoreId != null" >
+        SCORE_ID,
+      </if>
+      <if test="scorePromit != null" >
+        SCORE_PROMIT,
+      </if>
+      <if test="objectKind != null" >
+        OBJECT_KIND,
+      </if>
+      <if test="scoreValue != null" >
+        SCORE_VALUE,
+      </if>
+      <if test="pulishOrgan != null" >
+        PULISH_ORGAN,
+      </if>
+      <if test="lastModifiedBy != null" >
+        LAST_MODIFIED_BY,
+      </if>
+      <if test="lastModifiedAt != null" >
+        LAST_MODIFIED_AT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="scoreId != null" >
+        #{scoreId,jdbcType=VARCHAR},
+      </if>
+      <if test="scorePromit != null" >
+        #{scorePromit,jdbcType=VARCHAR},
+      </if>
+      <if test="objectKind != null" >
+        #{objectKind,jdbcType=VARCHAR},
+      </if>
+      <if test="scoreValue != null" >
+        #{scoreValue,jdbcType=DECIMAL},
+      </if>
+      <if test="pulishOrgan != null" >
+        #{pulishOrgan,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifiedBy != null" >
+        #{lastModifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifiedAt != null" >
+        #{lastModifiedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dd.entity.PjScore" >
+    update IT11.T_RPHG_PJ_SCORE
+    <set >
+      <if test="scorePromit != null" >
+        SCORE_PROMIT = #{scorePromit,jdbcType=VARCHAR},
+      </if>
+      <if test="objectKind != null" >
+        OBJECT_KIND = #{objectKind,jdbcType=VARCHAR},
+      </if>
+      <if test="scoreValue != null" >
+        SCORE_VALUE = #{scoreValue,jdbcType=DECIMAL},
+      </if>
+      <if test="pulishOrgan != null" >
+        PULISH_ORGAN = #{pulishOrgan,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifiedBy != null" >
+        LAST_MODIFIED_BY = #{lastModifiedBy,jdbcType=VARCHAR},
+      </if>
+      <if test="lastModifiedAt != null" >
+        LAST_MODIFIED_AT = #{lastModifiedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where SCORE_ID = #{scoreId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dd.entity.PjScore" >
+    update IT11.T_RPHG_PJ_SCORE
+    set SCORE_PROMIT = #{scorePromit,jdbcType=VARCHAR},
+      OBJECT_KIND = #{objectKind,jdbcType=VARCHAR},
+      SCORE_VALUE = #{scoreValue,jdbcType=DECIMAL},
+      PULISH_ORGAN = #{pulishOrgan,jdbcType=VARCHAR},
+      LAST_MODIFIED_BY = #{lastModifiedBy,jdbcType=VARCHAR},
+      LAST_MODIFIED_AT = #{lastModifiedAt,jdbcType=TIMESTAMP}
+    where SCORE_ID = #{scoreId,jdbcType=VARCHAR}
+  </update>
+</mapper>
